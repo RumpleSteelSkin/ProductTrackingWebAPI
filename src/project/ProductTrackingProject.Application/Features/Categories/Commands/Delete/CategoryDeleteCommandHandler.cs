@@ -7,7 +7,7 @@ public class CategoryDeleteCommandHandler(ICategoryRepository categoryRepository
 {
     public async Task<string> Handle(CategoryDeleteCommand request, CancellationToken cancellationToken)
     {
-        await categoryRepository.DeleteAsync(await categoryRepository.GetAsync(x => x.Id == request.Id, cancellationToken: cancellationToken) ?? throw new Exception($"{request.Id}'Id'li kategori bulunamadı."), cancellationToken: cancellationToken);
+        await categoryRepository.DeleteAsync(await categoryRepository.GetAsync(x => x.Id == request.Id, cancellationToken: cancellationToken, include: false, enableTracking: false) ?? throw new Exception($"{request.Id}'Id'li kategori bulunamadı."), cancellationToken: cancellationToken);
         return "Kategori Silindi.";
     }
 }

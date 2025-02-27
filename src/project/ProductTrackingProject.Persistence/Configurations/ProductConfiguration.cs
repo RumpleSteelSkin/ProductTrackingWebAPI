@@ -15,6 +15,8 @@ public class ProductConfiguration:IEntityTypeConfiguration<Product>
 
         builder.Property(x => x.Price)
             .HasPrecision(18, 2);
+
+        builder.Navigation(x => x.Category).AutoInclude();
         
         builder.HasOne(x => x.Category)
             .WithMany(x => x.Products)

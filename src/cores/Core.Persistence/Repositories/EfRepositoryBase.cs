@@ -29,7 +29,7 @@ public abstract class EfRepositoryBase<TEntity, TId, TContext>(TContext Context)
         await Context.SaveChangesAsync(cancellationToken: cancellationToken);
         return entity;
     }
-
+    
     public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null,
         bool enableTracking = true, bool include = true,
         CancellationToken cancellationToken = default)
