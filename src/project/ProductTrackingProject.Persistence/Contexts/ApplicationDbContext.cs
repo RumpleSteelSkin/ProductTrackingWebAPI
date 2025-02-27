@@ -2,7 +2,7 @@
 using Microsoft.EntityFrameworkCore;
 using ProductTrackingProject.Domain.Entities;
 namespace ProductTrackingProject.Persistence.Contexts;
-public class ApplicationDbContext : DbContext
+public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : DbContext(options)
 {
     public DbSet<Product> Products { get; set; }
     public DbSet<Category> Categories { get; set; }

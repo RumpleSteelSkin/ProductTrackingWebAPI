@@ -12,8 +12,6 @@
 
     <ItemGroup>
         <ProjectReference Include="..\..\cores\Core.Persistence\Core.Persistence.csproj" />
-        <ProjectReference Include="..\BasakSehirBurada.Application\BasakSehirBurada.Application.csproj" />
-        <ProjectReference Include="..\BasakSehirBurada.Domain\BasakSehirBurada.Domain.csproj" />
         <ProjectReference Include="..\ProductTrackingProject.Application\ProductTrackingProject.Application.csproj" />
         <ProjectReference Include="..\ProductTrackingProject.Domain\ProductTrackingProject.Domain.csproj" />
     </ItemGroup>
