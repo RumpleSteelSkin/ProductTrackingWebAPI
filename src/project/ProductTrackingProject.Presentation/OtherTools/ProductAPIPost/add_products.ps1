@@ -1,4 +1,5 @@
-﻿$categoryId = "cca079fb-38a6-4258-498f-08dd57314208"
+﻿$elektronikCategoryId = "cca079fb-38a6-4258-498f-08dd57314208"
+$beyazEsyaCategoryId = "01fc7288-890b-49bf-4990-08dd57314208"
 
 $products = @(
     @{ name = "Hakkon Şarjlı Matkap"; price = 1200.0; stock = 15 },
@@ -31,7 +32,7 @@ foreach ($product in $products) {
         name = $product.name
         price = $product.price
         stock = $product.stock
-        categoryId = $categoryId
+        categoryId = $elektronikCategoryId
     } | ConvertTo-Json -Depth 10
 
     Write-Output "Adding Product: $($product.name)"
@@ -53,4 +54,53 @@ foreach ($product in $products) {
     Start-Sleep -Milliseconds 500
 }
 
-Write-Output "Tüm ürünler başarıyla eklendi!"
+Write-Output "Tüm Elektronik ürünler başarıyla eklendi!"
+
+Start-Sleep -Milliseconds 1000
+
+
+
+$products = @(
+    @{ name = "Bosch Buzdolabı"; price = 15000.0; stock = 10 },
+    @{ name = "Siemens Çamaşır Makinesi"; price = 12500.0; stock = 8 },
+    @{ name = "Arçelik Bulaşık Makinesi"; price = 11000.0; stock = 12 },
+    @{ name = "Vestel Derin Dondurucu"; price = 9000.0; stock = 6 },
+    @{ name = "Samsung Kurutmalı Çamaşır Makinesi"; price = 17000.0; stock = 7 },
+    @{ name = "LG Televizyon 55 inç"; price = 22000.0; stock = 5 },
+    @{ name = "Profilo Set Üstü Ocak"; price = 7000.0; stock = 15 },
+    @{ name = "Beko Mikrodalga Fırın"; price = 5000.0; stock = 20 },
+    @{ name = "Hoover Kurutma Makinesi"; price = 13000.0; stock = 9 },
+    @{ name = "Miele Ankastre Fırın"; price = 25000.0; stock = 4 }
+)
+
+$logFile = "C:\Temp\api_log_beyazesya.txt"
+New-Item -Path $logFile -ItemType File -Force | Out-Null
+
+foreach ($product in $products) {
+    $jsonBody = @{
+        name = $product.name
+        price = $product.price
+        stock = $product.stock
+        categoryId = $beyazEsyaCategoryId
+    } | ConvertTo-Json -Depth 10
+
+    Write-Output "Adding Product: $($product.name)"
+    $jsonBody | Out-File -FilePath $logFile -Append
+
+    try {
+        $response = Invoke-WebRequest -Uri "http://localhost:5084/api/Products/add" `
+            -Method Post `
+            -Headers @{ "Accept" = "application/json"; "Content-Type" = "application/json" } `
+            -Body $jsonBody
+
+        Write-Output "Added: $($product.name) - Status: $($response.StatusCode)"
+    }
+    catch {
+        Write-Output "Error adding: $($product.name) - $($_.Exception.Message)"
+        $_.Exception.Response | Out-File -FilePath $logFile -Append
+    }
+
+    Start-Sleep -Milliseconds 500
+}
+
+Write-Output "Tüm beyaz eşya ürünleri başarıyla eklendi!"
