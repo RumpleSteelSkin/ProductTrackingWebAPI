@@ -1,4 +1,4 @@
-# 📌 Project Name
+# 📌 Product Tracking WebAPI
 
 This project is built using the **Onion CQRS architecture** while following **SOLID principles**. It leverages **ASP.NET Core**, **Entity Framework Core**, and **MediatR** for handling requests and business logic.
 
