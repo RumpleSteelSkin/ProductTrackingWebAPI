@@ -2,7 +2,7 @@
 using ProductTrackingProject.Application.Services.Repositories;
 using ProductTrackingProject.Domain.Entities;
 namespace ProductTrackingProject.Application.Features.Categories.Commands.Create;
-public class CategoryAddCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<CategoryAddCommand, string>
+public sealed class CategoryAddCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<CategoryAddCommand, string>
 {
     public async Task<string> Handle(CategoryAddCommand request, CancellationToken cancellationToken)
     {

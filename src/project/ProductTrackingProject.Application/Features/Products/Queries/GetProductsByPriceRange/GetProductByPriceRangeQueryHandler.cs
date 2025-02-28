@@ -6,11 +6,11 @@ namespace ProductTrackingProject.Application.Features.Products.Queries.GetProduc
 
 public sealed class
     GetProductByPriceRangeQueryHandler(IProductRepository productRepository, IMapper mapper) : IRequestHandler<GetProductByPriceRangeQuery,
-    List<GetProductByPriceRangeRequestDto>>
+    ICollection<GetProductByPriceRangeRequestDto>>
 {
-    public async Task<List<GetProductByPriceRangeRequestDto>> Handle(GetProductByPriceRangeQuery request, CancellationToken cancellationToken)
+    public async Task<ICollection<GetProductByPriceRangeRequestDto>> Handle(GetProductByPriceRangeQuery request, CancellationToken cancellationToken)
     {
-        return mapper.Map<List<GetProductByPriceRangeRequestDto>>(await productRepository.GetAllAsync(
+        return mapper.Map<ICollection<GetProductByPriceRangeRequestDto>>(await productRepository.GetAllAsync(
             x => x.Price >= request.MinPrice && x.Price <= request.MaxPrice, enableTracking: false,
             cancellationToken: cancellationToken));
     }

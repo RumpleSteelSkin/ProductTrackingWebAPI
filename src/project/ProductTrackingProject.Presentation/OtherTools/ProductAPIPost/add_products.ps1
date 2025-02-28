@@ -1,5 +1,5 @@
-﻿$elektronikCategoryId = "cca079fb-38a6-4258-498f-08dd57314208"
-$beyazEsyaCategoryId = "01fc7288-890b-49bf-4990-08dd57314208"
+﻿$elektronikCategoryId = "75def0e3-3f56-4ae3-c8d4-08dd57bb5069"
+$beyazEsyaCategoryId = "11577e7f-4075-45d1-c8d5-08dd57bb5069"
 
 $products = @(
     @{ name = "Hakkon Şarjlı Matkap"; price = 1200.0; stock = 15 },

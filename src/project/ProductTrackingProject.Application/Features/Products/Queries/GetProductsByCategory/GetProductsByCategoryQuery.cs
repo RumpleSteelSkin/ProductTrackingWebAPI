@@ -2,7 +2,7 @@
 
 namespace ProductTrackingProject.Application.Features.Products.Queries.GetProductsByCategory;
 
-public class GetProductsByCategoryQuery : IRequest<List<GetProductsByCategoryResponseDto>>
+public sealed class GetProductsByCategoryQuery : IRequest<ICollection<GetProductsByCategoryResponseDto>>
 {
     public string IdOrName { get; set; }
 }

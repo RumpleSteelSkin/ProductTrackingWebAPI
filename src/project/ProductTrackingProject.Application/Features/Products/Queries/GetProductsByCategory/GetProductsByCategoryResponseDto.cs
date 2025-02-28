@@ -1,6 +1,6 @@
 ﻿namespace ProductTrackingProject.Application.Features.Products.Queries.GetProductsByCategory;
 
-public class GetProductsByCategoryResponseDto()
+public sealed class GetProductsByCategoryResponseDto()
 {
     public string Name { get; set; }
     public decimal Price { get; set; }

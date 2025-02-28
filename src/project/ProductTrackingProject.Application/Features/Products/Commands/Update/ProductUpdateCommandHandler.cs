@@ -5,7 +5,7 @@ using ProductTrackingProject.Domain.Entities;
 
 namespace ProductTrackingProject.Application.Features.Products.Commands.Update;
 
-public class ProductUpdateCommandHandler(IProductRepository productRepository,IMapper mapper) : IRequestHandler<ProductUpdateCommand, string>
+public sealed class ProductUpdateCommandHandler(IProductRepository productRepository,IMapper mapper) : IRequestHandler<ProductUpdateCommand, string>
 {
     public async Task<string> Handle(ProductUpdateCommand request, CancellationToken cancellationToken)
     {

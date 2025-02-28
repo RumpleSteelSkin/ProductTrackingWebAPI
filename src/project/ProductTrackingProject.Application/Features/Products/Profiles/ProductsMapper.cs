@@ -10,7 +10,7 @@ using ProductTrackingProject.Domain.Entities;
 
 namespace ProductTrackingProject.Application.Features.Products.Profiles;
 
-public class ProductsMapper : Profile
+public sealed class ProductsMapper : Profile
 {
     public ProductsMapper()
     {

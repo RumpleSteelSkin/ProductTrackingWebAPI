@@ -6,11 +6,11 @@ namespace ProductTrackingProject.Application.Features.Products.Queries.GetProduc
 
 public sealed class
     GetProductsByStockRangeQueryHandler(IProductRepository productRepository,IMapper mapper) : IRequestHandler<GetProductsByStockRangeQuery,
-    List<GetProductsByStockRangeResponseDto>>
+    ICollection<GetProductsByStockRangeResponseDto>>
 {
-    public async Task<List<GetProductsByStockRangeResponseDto>> Handle(GetProductsByStockRangeQuery request, CancellationToken cancellationToken)
+    public async Task<ICollection<GetProductsByStockRangeResponseDto>> Handle(GetProductsByStockRangeQuery request, CancellationToken cancellationToken)
     {
-        return mapper.Map<List<GetProductsByStockRangeResponseDto>>(await productRepository.GetAllAsync(
+        return mapper.Map<ICollection<GetProductsByStockRangeResponseDto>>(await productRepository.GetAllAsync(
             x => x.Stock >= request.MinStock && x.Stock <= request.MaxStock, enableTracking: false,
             cancellationToken: cancellationToken));
     }

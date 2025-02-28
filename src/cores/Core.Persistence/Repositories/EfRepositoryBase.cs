@@ -30,7 +30,7 @@ public abstract class EfRepositoryBase<TEntity, TId, TContext>(TContext Context)
         return entity;
     }
     
-    public async Task<List<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null,
+    public async Task<ICollection<TEntity>> GetAllAsync(Expression<Func<TEntity, bool>>? filter = null,
         bool enableTracking = true, bool include = true,
         CancellationToken cancellationToken = default)
     {
@@ -68,7 +68,7 @@ public abstract class EfRepositoryBase<TEntity, TId, TContext>(TContext Context)
     }
 
     [SuppressMessage("ReSharper", "PossibleMultipleEnumeration")]
-    public async Task<IEnumerable<TEntity>> AddRangeAsync(IEnumerable<TEntity> entities,
+    public async Task<ICollection<TEntity>> AddRangeAsync(ICollection<TEntity> entities,
         CancellationToken cancellationToken = default)
     {
         await Context.Set<TEntity>().AddRangeAsync(entities, cancellationToken);

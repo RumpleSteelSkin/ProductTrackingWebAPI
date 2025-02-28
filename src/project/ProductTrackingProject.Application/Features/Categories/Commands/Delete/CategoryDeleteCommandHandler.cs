@@ -3,7 +3,7 @@ using ProductTrackingProject.Application.Services.Repositories;
 
 namespace ProductTrackingProject.Application.Features.Categories.Commands.Delete;
 
-public class CategoryDeleteCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<CategoryDeleteCommand, string>
+public sealed class CategoryDeleteCommandHandler(ICategoryRepository categoryRepository) : IRequestHandler<CategoryDeleteCommand, string>
 {
     public async Task<string> Handle(CategoryDeleteCommand request, CancellationToken cancellationToken)
     {

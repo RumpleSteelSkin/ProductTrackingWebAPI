@@ -5,18 +5,18 @@ using ProductTrackingProject.Domain.Entities;
 
 namespace ProductTrackingProject.Application.Features.Products.Queries.GetProductsByCategory;
 
-public class GetProductsByCategoryHandler(IProductRepository productRepository, IMapper mapper)
-    : IRequestHandler<GetProductsByCategoryQuery, List<GetProductsByCategoryResponseDto>>
+public sealed class GetProductsByCategoryHandler(IProductRepository productRepository, IMapper mapper)
+    : IRequestHandler<GetProductsByCategoryQuery, ICollection<GetProductsByCategoryResponseDto>>
 {
-    public async Task<List<GetProductsByCategoryResponseDto>> Handle(GetProductsByCategoryQuery request,
+    public async Task<ICollection<GetProductsByCategoryResponseDto>> Handle(GetProductsByCategoryQuery request,
         CancellationToken cancellationToken)
     {
         Guid? guid = Guid.TryParse(request.IdOrName, out var tempId) ? tempId : null;
-        List<Product> products;
+        ICollection<Product> products;
         if (guid is not null)
             products = await productRepository.GetAllAsync(x => x.CategoryId == guid, enableTracking: false, cancellationToken: cancellationToken);
         else
             products = await productRepository.GetAllAsync(x => x.Category.Name.ToLower().Contains(request.IdOrName.ToLower()), enableTracking: false, cancellationToken: cancellationToken);
-        return mapper.Map<List<GetProductsByCategoryResponseDto>>(products);
+        return mapper.Map<ICollection<GetProductsByCategoryResponseDto>>(products);
     }
 }
